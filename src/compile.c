@@ -3727,6 +3727,10 @@ void comp_builtin(struct program *prg, int builtin) {
 	int lab, labloop, labcheck, labnext, labmatch, labend;
 	int i;
 
+	if (!routines) {
+		routines = realloc(routines, nalloc_routine * sizeof(struct comp_routine));
+	}
+
 	memset(routines, 0, nroutine * sizeof(struct comp_routine));
 	nroutine = 0;
 	pred->normal_entry = make_routine_id();

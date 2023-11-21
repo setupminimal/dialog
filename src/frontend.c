@@ -2325,6 +2325,13 @@ static void assign_select_statements(struct program *prg) {
 				}
 				discover_select_statements(prg, pred->clauses[j]->body);
 			}
+
+			// selectforms is set in the above loop. But if pred->nclause is 0, the loop
+			// gets skipped, and selectforms may be uninitialized
+			if (!selectforms) {
+				selectforms = realloc(selectforms, nalloc_selectform * sizeof(struct selectform));
+			}
+
 			assert(!pred->selectforms);
 			pred->nselectform = nselectform;
 			pred->selectforms = arena_alloc(&pred->arena, nselectform * sizeof(struct selectform));
