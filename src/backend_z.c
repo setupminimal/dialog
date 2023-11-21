@@ -3775,7 +3775,7 @@ void compile_predicate(struct predname *predname, struct program *prg) {
 	}
 
 	if(bp->global_label) {
-		uint16_t rlabel[pred->nroutine];
+		uint16_t rlabel[pred->nroutine + 1];
 
 		memset(rlabel, 0, pred->nroutine * sizeof(uint16_t));
 		for(i = 0; i < pred->nroutine; i++) {

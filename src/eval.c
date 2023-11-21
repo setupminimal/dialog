@@ -151,7 +151,7 @@ static void cut_to(struct eval_state *es, int new_choice) {
 
 static void revert_env_to(struct eval_state *es, int new_env) {
 	struct env *env;
-	struct choice *cho = &es->choicestack[es->choice];
+	struct choice *cho = es->choice < 0 ? 0 : &es->choicestack[es->choice];
 
 	while(es->env > new_env && (es->choice < 0 || es->env >= cho->envtop)) {
 		env = &es->envstack[es->env--];

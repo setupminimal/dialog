@@ -1,8 +1,8 @@
 CC		= gcc
 
 # Debugging options
-LDFLAGS     += -fsanitize=undefined
-CFLAGS      += -g -fsanitize=undefined
+LDFLAGS     += -fsanitize=address
+CFLAGS      += -g -fsanitize=address
 
 CFLAGS		+= -O3 -Wall -DVERSION=\"0m/03\"
 WININCLUDE	= winglk

@@ -3386,7 +3386,7 @@ static void chunk_meta(FILE *f, struct program *prg) {
 static void chunk_urls(FILE *f, struct program *prg) {
 	uint32_t size;
 	int pad, i, j;
-	uint16_t offset[prg->nresource];
+	uint16_t offset[prg->nresource + 1];
 	uint32_t addr;
 
 	if(prg->nresource) {

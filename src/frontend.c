@@ -460,7 +460,7 @@ void trace_now_expression(struct astnode *an, uint8_t *bound, struct clause *cl,
 
 int trace_invocations_body(struct astnode **anptr, int flags, uint8_t *bound, struct clause *cl, int tail, struct program *prg) {
 	struct astnode *an;
-	uint8_t bound_sub[cl->nvar], bound_accum[cl->nvar];
+	uint8_t bound_sub[cl->nvar + 1], bound_accum[cl->nvar + 1];
 	int i, j, failed = 0;
 	uint32_t unbound;
 	int moreflags;
@@ -681,7 +681,7 @@ int trace_invocations_body(struct astnode **anptr, int flags, uint8_t *bound, st
 
 uint32_t trace_reconsider_clause(struct clause *cl, int flags, uint32_t unbound_in, struct program *prg) {
 	int i;
-	uint8_t bound[cl->nvar];
+	uint8_t bound[cl->nvar + 1];
 	uint32_t unbound_out = 0;
 
 #if 0

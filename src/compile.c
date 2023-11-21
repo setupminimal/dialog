@@ -1729,7 +1729,7 @@ static void comp_body(struct program *prg, struct clause *cl, struct astnode *an
 	int i, lab = -1, endlab, stoplab, vnum, box, dyn_id;
 	int at_tail;
 	struct astnode *sub_known_args[MAXPARAM];
-	uint8_t seen_sub[cl->nvar];
+	uint8_t seen_sub[cl->nvar + 1];
 
 	while(an) {
 		at_tail = (tail != NO_TAIL && !an->next_in_body);
@@ -2570,7 +2570,7 @@ static void comp_clause(struct program *prg, struct predicate *pred, struct inde
 	struct cinstr *ci;
 	int i, j, vnum;
 	struct clause *cl = pred->clauses[entry->clause_id];
-	uint8_t seen[cl->nvar];
+	uint8_t seen[cl->nvar + 1];
 	struct astnode *an, *body;
 	int all_seen_are_bound;
 	struct astnode *known_args[MAXPARAM];
@@ -3497,8 +3497,8 @@ static int optimize_vars(struct program *prg, struct predicate *pred) {
 
 	for(cnum = 0; cnum < pred->nclause; cnum++) {
 		cl = pred->clauses[cnum];
-		uint8_t tempseen[cl->next_temp];
-		struct cinstr *tempdef[cl->next_temp];
+		uint8_t tempseen[cl->next_temp + 1];
+		struct cinstr *tempdef[cl->next_temp + 1];
 
 		memset(tempseen, 0, cl->next_temp);
 		for(rnum = 0; rnum < nroutine; rnum++) {
