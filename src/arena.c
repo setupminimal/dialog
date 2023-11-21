@@ -35,7 +35,7 @@ void *arena_alloc(struct arena *arena, int size) {
 	arena->part = p;
 	ptr = p->data;
 #else
-	size = (size + 3) & ~3;
+	size = (size + 7) & ~7;
 	if(size <= arena->part->size - arena->part->pos) {
 		ptr = arena->part->data + arena->part->pos;
 		arena->part->pos += size;
