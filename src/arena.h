@@ -2,7 +2,7 @@ struct arena_part {
 	struct arena_part	*next;
 	int			size;
 	int			pos;
-	char			data[1];
+	char			data[];
 };
 
 struct arena {

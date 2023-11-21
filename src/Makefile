@@ -1,4 +1,9 @@
 CC		= gcc
+
+# Debugging options
+LDFLAGS     += -fsanitize=undefined
+CFLAGS      += -g -fsanitize=undefined
+
 CFLAGS		+= -O3 -Wall -DVERSION=\"0m/03\"
 WININCLUDE	= winglk
 WINLIB		= ../prebuilt/win32

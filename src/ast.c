@@ -678,6 +678,7 @@ void pred_release(struct predicate *pred) {
 			free(pred->clauses);
 			free(pred->macrodefs);
 			free(pred->wordmaps);
+			free(pred->backend);
 			free(pred);
 		}
 	}

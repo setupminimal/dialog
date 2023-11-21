@@ -127,19 +127,19 @@ int main(int argc, char **argv) {
 				verbose++;
 				break;
 			case 'o':
-				outname = strdup(optarg);
+				outname = arena_strdup(&backend_arena, optarg);
 				break;
 			case 't':
-				format = strdup(optarg);
+				format = arena_strdup(&backend_arena, optarg);
 				break;
 			case 'r':
-				resdir = strdup(optarg);
+				resdir = arena_strdup(&backend_arena, optarg);
 				break;
 			case 'c':
-				coverfname = strdup(optarg);
+				coverfname = arena_strdup(&backend_arena, optarg);
 				break;
 			case 'a':
-				coveralt = strdup(optarg);
+				coveralt = arena_strdup(&backend_arena, optarg);
 				break;
 			case 'H':
 				heapsize = strtol(optarg, 0, 10);
@@ -282,6 +282,8 @@ int main(int argc, char **argv) {
 	} else {
 		backend_z(outname, format, coverfname, coveralt, heapsize, auxsize, ltssize, strip, prg, &backend_arena);
 	}
+
+	free(outname);
 
 	free_program(prg);
 	arena_free(&backend_arena);

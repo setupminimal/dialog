@@ -17,7 +17,7 @@ void arena_free(struct arena *arena) {
 
 void arena_init(struct arena *arena, int nominal_size) {
 	arena->nominal_size = nominal_size;
-	arena->part = malloc(sizeof(struct arena_part) - 1 + nominal_size);
+	arena->part = malloc(sizeof(struct arena_part) + nominal_size);
 	arena->part->size = nominal_size;
 	arena->part->pos = 0;
 	arena->part->next = 0;
@@ -28,7 +28,7 @@ void *arena_alloc(struct arena *arena, int size) {
 	struct arena_part *p;
 
 #if DEBUG_ALLOCATIONS
-	p = malloc(sizeof(struct arena_part) - 1 + size);
+	p = malloc(sizeof(struct arena_part) + size);
 	p->size = size;
 	p->pos = size;
 	p->next = arena->part;
@@ -40,7 +40,7 @@ void *arena_alloc(struct arena *arena, int size) {
 		ptr = arena->part->data + arena->part->pos;
 		arena->part->pos += size;
 	} else {
-		p = malloc(sizeof(struct arena_part) - 1 + arena->nominal_size + size);
+		p = malloc(sizeof(struct arena_part) + arena->nominal_size + size);
 		p->size = arena->nominal_size + size;
 		p->pos = size;
 		p->next = arena->part;
