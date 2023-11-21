@@ -1070,7 +1070,7 @@ static int decode_word_output(struct program *prg, uint8_t **bufptr, struct cins
 	int nalloc = 0, pos = 0;
 	struct cinstr *ci;
 	struct word *w;
-	uint8_t numbuf[8];
+	uint8_t numbuf[9];
 	uint16_t uchar[2];
 
 	for(;;) {
@@ -2626,9 +2626,9 @@ static void compile_routines(struct program *prg, struct predicate *pred, int fi
 					if(prg->predicates[ci->oper[2].value]->builtin != BI_GETINPUT
 					&& prg->predicates[ci->oper[2].value]->builtin != BI_GETKEY) {
 						char buf[128];
-						snprintf(buf, sizeof(buf), prg->predicates[ci->oper[2].value]->printed_name + 1);
-						assert(strlen(buf));
-						buf[strlen(buf) - 1] = 0;
+						strncpy(buf, prg->predicates[ci->oper[2].value]->printed_name + 1, sizeof(buf) - 1);
+						assert(strnlen(buf, sizeof(buf)));
+						buf[strnlen(buf, sizeof(buf)) - 1] = 0;
 						ai = add_instr(AA_TRACEPOINT);
 						ai->oper[0] = (aaoper_t) {AAO_STRING, findstring((uint8_t *) tracelabels[ci->subop])};
 						ai->oper[1] = (aaoper_t) {AAO_STRING, findstring((uint8_t *) buf)};

@@ -1093,7 +1093,7 @@ static int decode_word_output(struct program *prg, char **bufptr, struct cinstr 
 	int nalloc = 0, pos = 0;
 	struct cinstr *ci;
 	struct word *w;
-	char numbuf[8];
+	char numbuf[9];
 
 	for(;;) {
 		ci = &instr[ninstr];

@@ -1,5 +1,4 @@
 CC		= gcc
-CFLAGS      += -Wno-error=format-security
 CFLAGS		+= -O3 -Wall -DVERSION=\"0m/03\"
 WININCLUDE	= winglk
 WINLIB		= ../prebuilt/win32

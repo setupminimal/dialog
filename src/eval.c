@@ -490,7 +490,8 @@ static int eval_pop_undo(struct eval_state *es) {
 
 	while(es->divsp--) o_end_box();
 	es->divsp = u->divsp;
-	memcpy(es->divstack, es->divstack, u->divsp * sizeof(uint16_t));
+	// TODO what does this even do?
+	memmove(es->divstack, es->divstack, u->divsp * sizeof(uint16_t));
 	for(i = 0; i < es->divsp; i++) {
 		o_begin_box("box");
 	}

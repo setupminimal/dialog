@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <errno.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -219,7 +220,7 @@ uint8_t *loadpng(char *fname, uint32_t *p_size, int *p_width, int *p_height) {
 	}
 	size = (uint32_t) st.st_size;
 	buf = malloc(size);
-	fread(buf, size, 1, f);
+	assert(fread(buf, size, 1, f) != -1);
 	fclose(f);
 
 	if(size < 8 || memcmp(buf, magic, 8)) {

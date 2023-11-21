@@ -104,6 +104,11 @@ int main(int argc, char **argv) {
 	char compiletime_buf[8], reldate_buf[16];
 	int need_meta;
 
+#ifdef __AFL_FUZZ_TESTCASE_LEN
+    __AFL_INIT();
+    while (__AFL_LOOP(10000)) {
+#endif
+
 	arena_init(&backend_arena, 1024);
 	comp_init();
 
@@ -280,6 +285,10 @@ int main(int argc, char **argv) {
 
 	free_program(prg);
 	arena_free(&backend_arena);
+
+#ifdef __AFL_FUZZ_TESTCASE_LEN
+	}
+#endif
 
 	return 0;
 }
